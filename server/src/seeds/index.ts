@@ -1,4 +1,5 @@
-import { seedUsers } from './user-seeds.js';
+import { seedUsers } from './user-seeds.js'; //SHOULD CREATE SEEDER FOR EVERY MODEL caps
+// import { seedCars } from '.car-seeds.js' example
 import sequelize from '../config/connection.js';
 
 const seedAll = async (): Promise<void> => {

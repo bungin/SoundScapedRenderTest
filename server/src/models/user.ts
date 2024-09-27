@@ -1,5 +1,5 @@
-import { DataTypes, type Sequelize, Model, type Optional } from 'sequelize';
-import bcrypt from 'bcrypt';
+import { DataTypes, type Sequelize, Model, type Optional } from "sequelize";
+import bcrypt from "bcrypt";
 
 interface UserAttributes {
   id: number;
@@ -8,17 +8,19 @@ interface UserAttributes {
   password: string;
 }
 
-interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
+interface UserCreationAttributes extends Optional<UserAttributes, "id"> {}
 
 export class User
   extends Model<UserAttributes, UserCreationAttributes>
   implements UserAttributes
 {
+  //exclamation is used due to not having constructor, TS will complain else.
   public id!: number;
   public username!: string;
   public email!: string;
   public password!: string;
 
+  // optionals VV
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
@@ -42,7 +44,7 @@ export function UserFactory(sequelize: Sequelize): typeof User {
         allowNull: false,
       },
       email: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING, //TODO: need to add validation on these
         allowNull: false,
       },
       password: {
@@ -51,14 +53,16 @@ export function UserFactory(sequelize: Sequelize): typeof User {
       },
     },
     {
-      tableName: 'users',
+      tableName: "users",
       sequelize,
       hooks: {
         beforeCreate: async (user: User) => {
           await user.setPassword(user.password);
         },
         beforeUpdate: async (user: User) => {
-          await user.setPassword(user.password);
+          if (user.changed("password")) {
+            await user.setPassword(user.password);
+          }
         },
       },
     }
