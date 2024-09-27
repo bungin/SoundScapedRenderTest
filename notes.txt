@@ -1,0 +1,16 @@
+
+spotify gets music, genius gets lyrics
+genius takes song url of spotify url
+
+features:
+
+database reqs:
+
+frontend: mobile usage
+
+mvp: BARE MIN: serve one song with lyrics, save to DB. 
+    able to serve random artist or random from genre plus lyric list for song. ability to save specific songs
+
+stretch goals: eventbrite api, scrolling lyrics timed to song,
+
+db: genre, songs, artists, albums
