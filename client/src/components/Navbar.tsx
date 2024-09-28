@@ -17,13 +17,14 @@ const Navbar = () => {
     console.log(loginCheck);
     checkLogin();
   }, [loginCheck]);
-  // tried to use <Button href: '/login'> to replace login/out buttons but ran in to hook(?) issue.
+      // CURRENTLY <Button> variant is not working. adding the bootstrap css to imports
+      // breaks the index.css styles. 
   return (
     <div className="navBG">
       <h1>Authentication Review</h1>
       <div>
         {!loginCheck ? (
-          <Button variant="primary" type="button">
+          <Button className="" variant="primary">
             <Link to="/login">Login</Link>
           </Button>
         ) : (
