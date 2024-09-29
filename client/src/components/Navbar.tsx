@@ -18,7 +18,7 @@ const Navbar = () => {
     checkLogin();
   }, [loginCheck]);
       // CURRENTLY <Button> variant is not working. adding the bootstrap css to imports
-      // breaks the index.css styles
+      // breaks the index.css styles. 
   return (
     <div className="navBG">
       <h1>Authentication Review</h1>

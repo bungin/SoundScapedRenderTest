@@ -3,6 +3,7 @@ import { retrieveUsers } from "../api/userAPI";
 import type { UserData } from "../interfaces/UserData";
 import ErrorPage from "./ErrorPage";
 import UserList from "../components/Users";
+import SearchBar from "../components/SearchBar";
 import auth from "../utils/auth";
 
 import SampleCard from "../components/SampleCard";
@@ -51,10 +52,28 @@ const Home = () => {
       ) : (
         <>
           <div>
+            <SearchBar></SearchBar>
+          </div>
+          <div style={{ marginTop: "-20px" }}>
             <UserList users={users} />
           </div>
-          <div className="container containerBG">
-            <SampleCard/>
+          <div className="container">
+            <div className="container containerBG"
+                 style={{margin:'0 10px'}}>
+              <SampleCard />
+            </div>
+            <div className="container containerBG"
+                 style={{margin:'0 10px'}}>
+              <SampleCard />
+            </div>
+            <div className="container containerBG"
+                 style={{margin:'0 10px'}}>
+              <SampleCard />
+            </div>
+            <div className="container containerBG"
+                 style={{margin:'0 10px'}}>
+              <SampleCard />
+            </div>
           </div>
         </>
       )}

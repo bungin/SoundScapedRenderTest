@@ -367,6 +367,11 @@ body {
   background-position: center;
 }
 
+.mainCont {
+  background-image: linear-gradient(to right,#000000e0, #150f8006);
+
+}
+
 .container {
   display: flex;
   justify-content: center;
@@ -383,5 +388,17 @@ body {
 
 .navBG {
   margin-top: -22px;
-  background-image: linear-gradient(#000000cd, #1e014c00);
+  /* background-image: linear-gradient(#000000cd, #1e014c00); */
+  background-image: linear-gradient(to right,#000000e0, #150f8006);
+}
+
+.searchBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px auto -19px auto;
+  width: 750px;
+  height: 50px;
+  border: #000000e0;
+  border-radius: 18%;
 }
