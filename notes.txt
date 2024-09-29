@@ -1,3 +1,6 @@
+======================================
+SHOULD DELETE THIS BEFORE SUBMISSION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+======================================
 
 spotify gets music, genius gets lyrics
 genius takes song url of spotify url
@@ -8,9 +11,19 @@ database reqs:
 
 frontend: mobile usage
 
-mvp: BARE MIN: serve one song with lyrics, save to DB. 
-    able to serve random artist or random from genre plus lyric list for song. ability to save specific songs
+mvp: BARE MIN: serve one song with lyrics, save song/url to DB. 
+    better: able to serve random artist or plus lyric list for song.
+            random from genre plus lyric list for song. 
+            ability to save specific songs(?)
+
+    pulling from genre feels like the way to go.
+
+
 
 stretch goals: eventbrite api, scrolling lyrics timed to song,
 
-db: genre, songs, artists, albums
+db: user/pass, genre, songs, artists, albums
+    Say we have multiple users, how do we structure the DB?
+    What does a user need to have stored?:
+        email, username, password, favorite artists?,- 
+        individual songs?(seems redundant with the function of spotify),
