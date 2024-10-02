@@ -21,7 +21,7 @@ const Navbar = () => {
       // breaks the index.css styles. 
   return (
     <div className="navBG">
-      <h1>Authentication Review</h1>
+      <h1 className="center">SoundScaped</h1>
       <div>
         {!loginCheck ? (
           <Button className="" variant="primary">
@@ -29,6 +29,7 @@ const Navbar = () => {
           </Button>
         ) : (
           <Button
+            className="butt"
             variant="secondary"
             onClick={() => {
               auth.logout();

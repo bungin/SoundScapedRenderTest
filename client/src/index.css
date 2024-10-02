@@ -367,9 +367,22 @@ body {
   background-position: center;
 }
 
-.mainCont {
-  background-image: linear-gradient(to right,#000000e0, #150f8006);
+.butt {
+  margin: 0px 20px 30px 20px ;
+}
 
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainCont {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin: 20px auto;
+  background-image: linear-gradient(to right,#000000e0, #150f8006);
 }
 
 .container {
@@ -382,7 +395,6 @@ body {
 }
 
 .containerBG {
-  
   background-image: radial-gradient(circle, #95393995, #620deab7);
 }
 
@@ -395,7 +407,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0px auto -19px auto;
+  margin: 0px auto 0px auto;
   width: 750px;
   height: 50px;
   border: #000000e0;
