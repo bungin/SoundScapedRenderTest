@@ -1,24 +1,34 @@
-import { useState } from 'react';
-import '../index.css';
+import React, { useState } from "react";
 
-function SearchBar() {
-  const [searchTerm, setSearchTerm] = useState('');
+interface SearchBarProps {
+  onSearch: (song: string, artist?: string) => void;
+}
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
+  const [song, setSong] = useState("");
+  const [artist, setArtist] = useState("");
+
+  const handleSearch = () => {
+    onSearch(song, artist);
   };
 
   return (
-    <div style={{ backgroundImage: 'linear-gradient(to right,#000000e0, #150f8006)' }}>
+    <div className="search-bar">
       <input
-        className='searchBar'
         type="text"
-        placeholder="Search for"
-        value={searchTerm}
-        onChange={handleChange}
+        placeholder="Enter song title"
+        value={song}
+        onChange={(e) => setSong(e.target.value)}
       />
+      <input
+        type="text"
+        placeholder="Enter artist name (optional)"
+        value={artist}
+        onChange={(e) => setArtist(e.target.value)}
+      />
+      <button onClick={handleSearch}>Search Lyrics</button>
     </div>
   );
-}
+};
 
 export default SearchBar;
