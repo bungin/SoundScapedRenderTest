@@ -5,13 +5,14 @@ import ErrorPage from "./ErrorPage";
 import UserList from "../components/Users";
 import SearchBar from "../components/SearchBar";
 import auth from "../utils/auth";
-
+import SignUp from "./SignUp";
 import SampleCard from "../components/SampleCard";
 
 const Home = () => {
   const [users, setUsers] = useState<UserData[]>([]);
   const [error, setError] = useState(false);
   const [loginCheck, setLoginCheck] = useState(false);
+  const [showSignUp, setShowSignUp] = useState(false);
 
   useEffect(() => {
     if (loginCheck) {
@@ -45,33 +46,43 @@ const Home = () => {
 
   return (
     <>
-      {!loginCheck ? (
-        <div className="login-notice">
-          <h1>Please Login</h1>
+    {/* If not logged in, show Login or Sign-Up notice */}
+    {!loginCheck ? (
+        <div className="login-notice">0
+          <div>
+            {/* Toggle button between Login and Sign-Up */}
+            <button onClick={() => setShowSignUp(!showSignUp)} className="toggle-btn">
+              {showSignUp ? "Go Back" : "Sign Up"}
+            </button>
+          </div>
+        {/* Show either Login or Sign-Up based on state */}
+          {showSignUp ? (
+            <SignUp onSuccess={() => setLoginCheck(true)} />
+          ) : (
+            <p>Please login or sign up to continue.</p>
+
+          )}
         </div>
       ) : (
         <>
+          {/* Existing Content if Logged In */}
           <div>
-            <SearchBar></SearchBar>
+            <SearchBar />
           </div>
           <div style={{ marginTop: "-20px" }}>
             <UserList users={users} />
           </div>
           <div className="container">
-            <div className="container containerBG"
-                 style={{margin:'0 10px'}}>
+            <div className="container containerBG" style={{ margin: "0 10px" }}>
               <SampleCard />
             </div>
-            <div className="container containerBG"
-                 style={{margin:'0 10px'}}>
+            <div className="container containerBG" style={{ margin: "0 10px" }}>
               <SampleCard />
             </div>
-            <div className="container containerBG"
-                 style={{margin:'0 10px'}}>
+            <div className="container containerBG" style={{ margin: "0 10px" }}>
               <SampleCard />
             </div>
-            <div className="container containerBG"
-                 style={{margin:'0 10px'}}>
+            <div className="container containerBG" style={{ margin: "0 10px" }}>
               <SampleCard />
             </div>
           </div>
@@ -82,3 +93,6 @@ const Home = () => {
 };
 
 export default Home;
+
+
+
