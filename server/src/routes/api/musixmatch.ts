@@ -38,22 +38,27 @@ router.get('/search', async (req, res) => {
 
     try {
         // Search for the track based on song title and artist
-        const response = await fetch(`https://api.musixmatch.com/ws/1.1/track.search?q_track=${song}&q_artist=${artist}&apikey=${MUSIXMATCH_API_KEY}&page_size=1&s_track_rating=desc`, {
+        const response = await axios.get(`https://api.musixmatch.com/ws/1.1/track.search`, {
+            params: {
+                q_track: song,
+                q_artist: artist,
+                apikey: MUSIXMATCH_API_KEY,
+                page_size: 1,
+                s_track_rating: 'desc',
+            },
         });
 
-        const res = await response.json();
-        const {body:{track_list}}=res;
+        const trackList = response.data.message.body.track_list;
 
-        if (track_list.length === 0) {
-           return res.status(404).json({ error: 'No track found' });
-       }
+        if (trackList.length === 0) {
+            return res.status(404).json({ error: 'No track found' });
+        }
 
-       console.log(track_list)
+        res.json(trackList[0].track); // Return the first track in the list
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'An error occurred while searching for the track' });
+    }
+});
 
-     } catch (error) {
-         console.error(error);
-         res.status(500).json({ error: 'An error occurred while searching for the track' });
-     }
- });
-
-export   {router as musixRouter};
+export { router as musixRouter };

@@ -9,10 +9,10 @@ const Login = () => {
     username: '',
     password: '',
   });
+  const [loading, setLoading] = useState(false); // For loading state
+  const [error, setError] = useState<string | null>(null); // For error state
 
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setLoginData({
       ...loginData,
@@ -22,11 +22,23 @@ const Login = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    setError(null); // Reset error on new submit
+    setLoading(true); // Start loading
+
+    if (!loginData.username || !loginData.password) {
+      setError('Username and password are required');
+      setLoading(false);
+      return;
+    }
+
     try {
       const data = await login(loginData);
       Auth.login(data.token);
     } catch (err) {
       console.error('Failed to login', err);
+      setError('Login failed. Please check your credentials and try again.');
+    } finally {
+      setLoading(false); // Stop loading after login attempt
     }
   };
 
@@ -35,28 +47,33 @@ const Login = () => {
       <form className='form login-form' onSubmit={handleSubmit}>
         <h1>Login</h1>
         <div className='form-group'>
-          <label>Username</label>
+          <label htmlFor='username'>Username</label>
           <input
             className='form-input'
             type='text'
+            id='username'
             name='username'
             value={loginData.username || ''}
             onChange={handleChange}
+            disabled={loading} // Disable input during login
           />
         </div>
         <div className='form-group'>
-          <label>Password</label>
+          <label htmlFor='password'>Password</label>
           <input
             className='form-input'
             type='password'
+            id='password'
             name='password'
             value={loginData.password || ''}
             onChange={handleChange}
+            disabled={loading} // Disable input during login
           />
         </div>
+        {error && <p className='error-message'>{error}</p>} {/* Display error message */}
         <div className='form-group'>
-          <button className='btn btn-primary' type='submit'>
-            Login
+          <button className='btn btn-primary' type='submit' disabled={loading}>
+            {loading ? 'Logging in...' : 'Login'}
           </button>
         </div>
       </form>
