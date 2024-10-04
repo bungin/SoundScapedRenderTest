@@ -3,7 +3,12 @@ import Auth from '../utils/auth';
 import { signup } from '../api/authAPI';
 import type { UserSignup } from '../interfaces/UserSign';
 
-const SignUp = () => {
+interface SignUpProps {
+  onSuccess: () => void;  // A callback to notify the parent component (e.g., Home.tsx)
+  onToggle: () => void;  // A callback to toggle between Login and Sign-Up
+}
+
+const SignUp: React.FC<SignUpProps> = ({ onSuccess, onToggle }) => {
   const [signupData, setSignupData] = useState<UserSignup>({ username: '', email: '', password: '' });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -14,10 +19,19 @@ const SignUp = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const data = await signup(signupData);
-      Auth.login(data.token);
+      // Send the signup data to the backend
+      const response = await signup(signupData);
+
+      // Ensure the response is correctly formatted
+      if (response && response.token) {
+        console.log('Signup successful, received token:', response.token);
+        Auth.login(response.token);  // Log the user in with the received token
+        onSuccess();  // Notify the parent component
+      } else {
+        console.error('Unexpected response format:', response);
+      }
     } catch (err) {
-      console.error('Failed to sign up', err);
+      console.error('Failed to sign up:', err);
     }
   };
 
@@ -61,6 +75,12 @@ const SignUp = () => {
         />
       </div>
       <button type='submit' className='btn'>Sign Up</button>
+      <p>
+        Already have an account?{' '}
+        <span onClick={onToggle} className='link'>
+          Login here
+        </span>
+      </p>
     </form>
   );
 };
