@@ -371,6 +371,27 @@ body {
   margin: 0px 20px 30px 20px ;
 }
 
+.inButton {
+  margin: 0px 20px 30px 20px ;
+  background-color: #0dea66b7;
+  color: #e4cece;
+  border: 1px solid #620deab7;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.outButton {
+  background-color: #620deab7;
+  color: #e4cece;
+  border: 1px solid #620deab7;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
 .center {
   display: flex;
   justify-content: center;
