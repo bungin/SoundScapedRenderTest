@@ -26,7 +26,7 @@ const Navbar = () => {
           <div className="">
             <p className="center" style={{fontSize:'20px'}}>
               //--------------------------\\<br/>//\__//\__//d--b//\__//\__/\\<br/>\----------------------------/</p>
-            {/* commented out to remove unnecessary btn */}
+            {/* display: 'none' to hide unnecesary btn */}
           <Button style={{display:'none'}}>
             <Link to="/login">Login</Link>
           </Button>
@@ -34,7 +34,6 @@ const Navbar = () => {
         ) : (
           <Button
             className="outButton"
-            variant="secondary"
             onClick={() => {
               auth.logout();
             }}

@@ -371,14 +371,17 @@ body {
   margin: 0px 20px 30px 20px ;
 }
 
-.inButton {
-  margin: 0px 20px 30px 20px ;
+.suBtn {
   background-color: #b69ff4;
   border: 1px solid #620deab7;
   border-radius: 10px;
   font-size: 16px;
   cursor: pointer;
   transition: 0.3s;
+  margin-top: 10px;
+  margin-left: auto;
+  margin: 10px 8px 0px 0px;
+  padding-bottom: 6px;
 }
 
 .inButtonForm {
@@ -389,6 +392,8 @@ body {
   cursor: pointer;
   transition: 0.3s;
   margin-top: 10px;
+  margin-left: 40px;
+  padding-bottom: 6px;
 }
 
 .inButton:hover {
@@ -404,6 +409,13 @@ body {
   font-size: 16px;
   cursor: pointer;
   transition: 0.3s;
+  padding-bottom: 7px;
+  margin: -3px 0px 10px 10px;
+}
+
+.outButton:hover {
+  background-color: #bd001fc9;
+  color: #e4cece;
 }
 
 .center {
@@ -466,6 +478,20 @@ body {
   border-radius: 18%;
 }
 
-@media screen and (max-width: 350px) {
-  
+@media screen and (max-width: 450px) {
+  .searchBar {
+    width: 300px;
+  }
+}
+
+@media screen and (min-width: 450px) {
+  .searchBar {
+    width: 450px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .searchBar {
+    width: 300px;
+  }
 }

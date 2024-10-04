@@ -33,24 +33,22 @@ const Login: React.FC<LoginProps> = ({ onSuccess, onToggle }) => {
   return (
     <div className="formContainer">
       <div >
-        <form className="form login-form" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <h1 className="center">Login</h1>
-          <div className="form-group">
+          <div style={{marginLeft:'40px'}}>
             <label>Username</label>
             <br />
             <input
-              className="form-input"
               type="text"
               name="username"
               value={loginData.username || ""}
               onChange={handleChange}
             />
           </div>
-          <div className="form-group">
+          <div style={{marginLeft:'40px'}}>
             <label>Password</label>
             <br />
             <input
-              className="form-input"
               type="password"
               name="password"
               value={loginData.password || ""}
