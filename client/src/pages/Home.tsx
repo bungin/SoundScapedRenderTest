@@ -6,6 +6,7 @@ import UserList from "../components/Users";
 import SearchBar from "../components/SearchBar";
 import auth from "../utils/auth";
 import SignUp from "./SignUp";
+import Login from "./Login";
 import SampleCard from "../components/SampleCard";
 
 const Home = () => {
@@ -48,19 +49,27 @@ const Home = () => {
     <>
     {/* If not logged in, show Login or Sign-Up notice */}
     {!loginCheck ? (
-        <div className="login-notice">0
+        <div className="login-notice">
           <div>
             {/* Toggle button between Login and Sign-Up */}
             <button onClick={() => setShowSignUp(!showSignUp)} className="toggle-btn">
-              {showSignUp ? "Go Back" : "Sign Up"}
+              {showSignUp ? "Login" : "Sign Up"}
             </button>
           </div>
         {/* Show either Login or Sign-Up based on state */}
           {showSignUp ? (
-            <SignUp onSuccess={() => setLoginCheck(true)} />
+            <SignUp 
+            onSuccess={() => setLoginCheck(true)} 
+            onToggle={() => setShowSignUp(false)} 
+            />
           ) : (
-            <p>Please login or sign up to continue.</p>
-
+            <>
+              <Login 
+                onSuccess={() => setLoginCheck(true)}
+                onToggle={() => setShowSignUp(true)}
+              />
+              <p>Please login or sign up to continue.</p>
+            </>
           )}
         </div>
       ) : (

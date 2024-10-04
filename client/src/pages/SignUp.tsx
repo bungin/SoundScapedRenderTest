@@ -5,9 +5,10 @@ import type { UserSignup } from '../interfaces/UserSign';
 
 interface SignUpProps {
   onSuccess: () => void;  // A callback to notify the parent component (e.g., Home.tsx)
+  onToggle: () => void;  // A callback to toggle between Login and Sign-Up
 }
 
-const SignUp: React.FC<SignUpProps> = ({ onSuccess }) => {
+const SignUp: React.FC<SignUpProps> = ({ onSuccess, onToggle }) => {
   const [signupData, setSignupData] = useState<UserSignup>({ username: '', email: '', password: '' });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -74,6 +75,12 @@ const SignUp: React.FC<SignUpProps> = ({ onSuccess }) => {
         />
       </div>
       <button type='submit' className='btn'>Sign Up</button>
+      <p>
+        Already have an account?{' '}
+        <span onClick={onToggle} className='link'>
+          Login here
+        </span>
+      </p>
     </form>
   );
 };
