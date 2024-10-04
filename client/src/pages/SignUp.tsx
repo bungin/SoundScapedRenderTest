@@ -36,10 +36,10 @@ const SignUp: React.FC<SignUpProps> = ({ onSuccess, onToggle }) => {
   };
 
   return (
-    <form className='form signup-form' onSubmit={handleSubmit}>
+    <form className='formContainer' onSubmit={handleSubmit}>
       <h1>Create an Account</h1>
       <div className='form-group'>
-        <label>Username</label>
+        <label>Username</label><br />
         <input
           className='form-input'
           type='text'
@@ -51,7 +51,7 @@ const SignUp: React.FC<SignUpProps> = ({ onSuccess, onToggle }) => {
         />
       </div>
       <div className='form-group'>
-        <label>Email</label>
+        <label>Email</label><br />
         <input
           className='form-input'
           type='email'
@@ -63,7 +63,7 @@ const SignUp: React.FC<SignUpProps> = ({ onSuccess, onToggle }) => {
         />
       </div>
       <div className='form-group'>
-        <label>Password</label>
+        <label>Password</label><br />
         <input
           className='form-input'
           type='password'
@@ -74,7 +74,7 @@ const SignUp: React.FC<SignUpProps> = ({ onSuccess, onToggle }) => {
           required
         />
       </div>
-      <button type='submit' className='btn'>Sign Up</button>
+      <button type='submit' className='inButtonForm'>Sign Up</button>
       <p>
         Already have an account?{' '}
         <span onClick={onToggle} className='link'>

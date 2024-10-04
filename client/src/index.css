@@ -362,7 +362,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   font-size: 16px;
   color: #e4cece;
-  background-image: url('./assets/backgrounds/bg1.png'), url('./assets/backgrounds/bgStars2.png');
+  background-image: url('./assets/backgrounds/bg1.png'), url('./assets/backgrounds/bgStars2.png'), radial-gradient(circle, #95393995, #620deab7);
   background-repeat: repeat-y, repeat;
   background-position: center;
 }
@@ -373,13 +373,27 @@ body {
 
 .inButton {
   margin: 0px 20px 30px 20px ;
-  background-color: #0dea66b7;
-  color: #e4cece;
+  background-color: #b69ff4;
   border: 1px solid #620deab7;
   border-radius: 10px;
   font-size: 16px;
   cursor: pointer;
   transition: 0.3s;
+}
+
+.inButtonForm {
+  background-color: #b69ff4;
+  border: 1px solid #620deab7;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 10px;
+}
+
+.inButton:hover {
+  background-color: #b69ff4c9;
+  color: #e4cece;
 }
 
 .outButton {
@@ -396,6 +410,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.link {
+  color: #e4cece;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .mainCont {
@@ -419,6 +439,17 @@ body {
   background-image: radial-gradient(circle, #95393995, #620deab7);
 }
 
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: fit-content;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.49);
+}
+
 .navBG {
   margin-top: -22px;
   background-image: linear-gradient(to right,#000000e0, #150f8006);
@@ -433,4 +464,8 @@ body {
   height: 50px;
   border: #000000e0;
   border-radius: 18%;
+}
+
+@media screen and (max-width: 350px) {
+  
 }

@@ -51,10 +51,6 @@ const Home = () => {
     {!loginCheck ? (
         <div className="login-notice">
           <div>
-            {/* Toggle button between Login and Sign-Up */}
-            <button onClick={() => setShowSignUp(!showSignUp)} className="toggle-btn">
-              {showSignUp ? "Login" : "Sign Up"}
-            </button>
           </div>
         {/* Show either Login or Sign-Up based on state */}
           {showSignUp ? (
@@ -68,7 +64,6 @@ const Home = () => {
                 onSuccess={() => setLoginCheck(true)}
                 onToggle={() => setShowSignUp(true)}
               />
-              <p>Please login or sign up to continue.</p>
             </>
           )}
         </div>

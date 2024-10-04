@@ -17,19 +17,23 @@ const Navbar = () => {
     console.log(loginCheck);
     checkLogin();
   }, [loginCheck]);
-      // CURRENTLY <Button> variant is not working. adding the bootstrap css to imports
-      // breaks the index.css styles. 
   return (
+    <div>
     <div className="navBG">
       <h1 className="center">SoundScaped</h1>
       <div>
         {!loginCheck ? (
-          <Button className="" variant="primary">
+          <div className="">
+            <p className="center" style={{fontSize:'20px'}}>
+              //--------------------------\\<br/>//\__//\__//d--b//\__//\__/\\<br/>\----------------------------/</p>
+            {/* commented out to remove unnecessary btn */}
+          <Button style={{display:'none'}}>
             <Link to="/login">Login</Link>
           </Button>
+          </div>
         ) : (
           <Button
-            className="butt"
+            className="outButton"
             variant="secondary"
             onClick={() => {
               auth.logout();
@@ -40,6 +44,7 @@ const Navbar = () => {
         )}
       </div>
     </div>
+  </div>
   );
 };
 
