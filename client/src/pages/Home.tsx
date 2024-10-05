@@ -12,6 +12,7 @@ const Home = () => {
   const [users, setUsers] = useState<UserData[]>([]);
   const [error, setError] = useState(false);
   const [loginCheck, setLoginCheck] = useState(false);
+  
 
   useEffect(() => {
     if (loginCheck) {
