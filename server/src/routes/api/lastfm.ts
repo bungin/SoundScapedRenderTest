@@ -5,28 +5,30 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+const router = express.Router();
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 // // Last.fm API root URL
 // Documentation: http://ws.audioscrobbler.com/2.0/
 
-app.use(express.static("public"));
-app.use(express.json());
+router.use(express.static("public"));
+router.use(express.json());
 
 let sessionKey: string | undefined;
 
-app.get("/auth", (req: Request, res: Response) => {
+router.get("/auth", (req: Request, res: Response) => {
   const apiKey = process.env.LASTFM_API_KEY;
   const callbackURL = process.env.CALLBACK_URL;
   const authUrl = `http://www.last.fm/api/auth/?api_key=${apiKey}&cb=${callbackURL}`;
   res.redirect(authUrl);
 });
 
-app.get("/callback", async (req: Request, res: Response) => {
+router.get("/callback", async (req: Request, res: Response) => {
   const token = req.query.token as string;
   const apiKey = process.env.LASTFM_API_KEY;
-  const apiSecret = process.env.LASTGM_API_SECRET;
+  const apiSecret = process.env.LASTFM_API_SECRET;
 
   const apiSig = crypto
     .createHash("md5")
@@ -45,7 +47,7 @@ app.get("/callback", async (req: Request, res: Response) => {
 });
 
 // searching songs endpoint
-app.post("/search", async (req: Request, res: Response) => {
+router.post("/search", async (req: Request, res: Response) => {
   const { songName } = req.body;
   const apiKey = process.env.LASTFM_API_KEY;
 
