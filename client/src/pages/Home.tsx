@@ -1,19 +1,22 @@
 import { useState, useEffect, useLayoutEffect } from "react";
+import type { UserData } from "../interfaces/UserData"; 
 import { retrieveUsers } from "../api/userAPI";
-import type { UserData } from "../interfaces/UserData";
+import axios from "axios";
+import SearchBar from "../components/SearchBar";
+import SampleCard from "../components/SampleCard";
+import auth from "../utils/auth";
+import Login from "./Login";
+import SignUp from "./SignUp";
 import ErrorPage from "./ErrorPage";
 import UserList from "../components/Users";
-import SearchBar from "../components/SearchBar";
-import auth from "../utils/auth";
-import SignUp from "./SignUp";
-import Login from "./Login";
-import SampleCard from "../components/SampleCard";
 
 const Home = () => {
   const [users, setUsers] = useState<UserData[]>([]);
   const [error, setError] = useState(false);
   const [loginCheck, setLoginCheck] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
+  const [songs, setSongs] = useState([]);
+  
 
   useEffect(() => {
     if (loginCheck) {
@@ -36,10 +39,30 @@ const Home = () => {
       const data = await retrieveUsers();
       setUsers(data);
     } catch (err) {
-      console.error("Failed to retrieve tickets:", err);
+      console.error("Failed to retrieve users:", err);
       setError(true);
     }
   };
+
+  const handleSongSearch = async (query: string) => {
+    try {
+      const response = await axios.get(
+        `https://api.musixmatch.com/ws/1.1/track.search`,
+        {
+          params: {
+            q_track: query,
+            apikey: process.env.REACT_APP_MUSIXMATCH_API_KEY, // Use REACT_APP_ prefix
+          },
+        }
+      );
+      const songList = response.data.message.body.track_list;
+      setSongs(songList);
+    } catch (error) {
+      console.error("Error fetching songs:", error);
+      setError(true);
+    }
+  };
+  
 
   if (error) {
     return <ErrorPage />;
@@ -47,53 +70,36 @@ const Home = () => {
 
   return (
     <>
-    {/* If not logged in, show Login or Sign-Up notice */}
-    {!loginCheck ? (
+      {!loginCheck ? (
         <div className="login-notice">
           <div>
-            {/* Toggle button between Login and Sign-Up */}
             <button onClick={() => setShowSignUp(!showSignUp)} className="toggle-btn">
               {showSignUp ? "Login" : "Sign Up"}
             </button>
           </div>
-        {/* Show either Login or Sign-Up based on state */}
           {showSignUp ? (
-            <SignUp 
-            onSuccess={() => setLoginCheck(true)} 
-            onToggle={() => setShowSignUp(false)} 
-            />
+            <SignUp onSuccess={() => setLoginCheck(true)} onToggle={() => setShowSignUp(false)} />
           ) : (
             <>
-              <Login 
-                onSuccess={() => setLoginCheck(true)}
-                onToggle={() => setShowSignUp(true)}
-              />
+              <Login onSuccess={() => setLoginCheck(true)} onToggle={() => setShowSignUp(true)} />
               <p>Please login or sign up to continue.</p>
             </>
           )}
         </div>
       ) : (
         <>
-          {/* Existing Content if Logged In */}
           <div>
-            <SearchBar />
+            <SearchBar onSearch={handleSongSearch} />
           </div>
           <div style={{ marginTop: "-20px" }}>
             <UserList users={users} />
           </div>
           <div className="container">
-            <div className="container containerBG" style={{ margin: "0 10px" }}>
-              <SampleCard />
-            </div>
-            <div className="container containerBG" style={{ margin: "0 10px" }}>
-              <SampleCard />
-            </div>
-            <div className="container containerBG" style={{ margin: "0 10px" }}>
-              <SampleCard />
-            </div>
-            <div className="container containerBG" style={{ margin: "0 10px" }}>
-              <SampleCard />
-            </div>
+            {songs.map((song: any, index: number) => (
+              <div key={index} className="container containerBG" style={{ margin: "0 10px" }}>
+                <SampleCard title={song.track.track_name} artist={song.track.artist_name} />
+              </div>
+            ))}
           </div>
         </>
       )}
@@ -102,6 +108,3 @@ const Home = () => {
 };
 
 export default Home;
-
-
-

@@ -1,15 +1,20 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import axios from 'axios';
+import dotenv from 'dotenv';
+
+// Load environment variables
+dotenv.config();
 
 const router = express.Router();
-const MUSIXMATCH_API_KEY = process.env.MUSIXMATCH_API_KEY; // Ensure this is in your .env file
+const MUSIXMATCH_API_KEY = process.env.MUSIXMATCH_API_KEY as string; // Type assertion, assuming it's a string
 
 // Example endpoint to get lyrics
-router.get('/lyrics', async (req, res) => {
-    const { trackId } = req.query; // Get the track ID from query parameters
+router.get('/lyrics', async (req: Request, res: Response): Promise<void> => {
+    const { trackId } = req.query;
 
     if (!trackId) {
-        return res.status(400).json({ error: 'Track ID is required' });
+        res.status(400).json({ error: 'Track ID is required' });
+        return;
     }
 
     try {
@@ -20,10 +25,16 @@ router.get('/lyrics', async (req, res) => {
             },
         });
 
-        const lyrics = response.data.message.body.lyrics;
-        res.json(lyrics);
+        const lyrics = response.data?.message?.body?.lyrics?.lyrics_body;
+
+        if (!lyrics) {
+            res.status(404).json({ error: 'Lyrics not found' });
+            return;
+        }
+
+        res.json({ lyrics });
     } catch (error) {
-        console.error(error);
+        console.error('Error fetching lyrics:', error instanceof Error ? error.message : error);
         res.status(500).json({ error: 'An error occurred while fetching lyrics' });
     }
 });
