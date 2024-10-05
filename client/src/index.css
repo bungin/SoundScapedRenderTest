@@ -365,6 +365,7 @@ body {
   background-image: url('./assets/backgrounds/bg1.png'), url('./assets/backgrounds/bgStars2.png'), radial-gradient(circle, #95393995, #620deab7);
   background-repeat: repeat-y, repeat;
   background-position: center;
+  background-size: auto, 80%;
 }
 
 .butt {
