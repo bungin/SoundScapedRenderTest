@@ -17,7 +17,7 @@ function SearchBar() {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'user-agent': 'SoundScaped',
+                    'User-Agent': 'SoundScaped',
                 },
                 body: JSON.stringify({ songName: searchTerm }),
             });
