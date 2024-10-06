@@ -2,7 +2,6 @@ import { useState } from 'react';
 import '../index.css';
 import Auth from '../utils/auth';
 
-
 function SearchBar() {
     const [searchTerm, setSearchTerm] = useState('');
     const [results, setResults] = useState<any[]>([]);

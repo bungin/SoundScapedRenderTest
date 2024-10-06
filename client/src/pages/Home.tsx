@@ -71,7 +71,7 @@ const Home = () => {
           <div>
             <SearchBar />
           </div>
-          {/* UserList and SampleCard will be deleted once we start rendering. 
+          {/* UserList(?) and SampleCard will be deleted once we start rendering. 
               container/containerBG may need to be changed*/}
           <div style={{ marginTop: "-20px" }}> 
             <UserList users={users} />
