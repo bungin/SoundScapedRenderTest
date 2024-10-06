@@ -17,7 +17,8 @@ router.use(express.static("public"));
 router.use(express.json());
 
 let sessionKey: string | undefined;
-
+// dont think we need the callback auth since we wont be
+// dealing with lastfm users
 router.get("/auth", (req: Request, res: Response) => {
   const apiKey = process.env.LASTFM_API_KEY;
   const callbackURL = process.env.CALLBACK_URL;
@@ -54,9 +55,8 @@ router.post("/search", async (req: Request, res: Response) => {
   try {
     const response = await axios.get(
       `http://ws.audioscrobbler.com/2.0/?method=track.search&track=${encodeURIComponent(
-        songName
-      )}&api_key=${apiKey}&format=json`
-    );
+        songName)}&api_key=${apiKey}&format=json`);
+        
     res.json(response.data);
   } catch (error) {
     res.status(500).send("Error searching for songs");
@@ -66,3 +66,5 @@ router.post("/search", async (req: Request, res: Response) => {
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+export { router as lfmRouter };

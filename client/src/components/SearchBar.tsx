@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import '../index.css';
+import Auth from '../utils/auth';
+
+
 function SearchBar() {
     const [searchTerm, setSearchTerm] = useState('');
     const [results, setResults] = useState<any[]>([]);
@@ -13,14 +16,15 @@ function SearchBar() {
             return;
         }
         try {
-            const response = await fetch('/search', {
-                method: 'GET',
+            const response = await fetch('api/search', {
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'User-Agent': 'SoundScaped',
+                    'Authorization': `Bearer ${Auth.getToken()}`,
                 },
                 body: JSON.stringify({ songName: searchTerm }),
-            });
+              });
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -46,7 +50,7 @@ function SearchBar() {
                 placeholder="Search for"
                 value={searchTerm}
                 onChange={handleChange}
-                onKeyPress={handleKeyPress} // Add the keypress event handler here
+                onKeyUp={handleKeyPress} // Add the keypress event handler here
             />
             <button onClick={handleSearch}>Search</button>
             {error && <div style={{ color: 'red' }}>{error}</div>}
