@@ -1,0 +1,32 @@
+======================================
+SHOULD DELETE THIS BEFORE SUBMISSION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+======================================
+
+homepage: responsiveness on cards/media queries, remove placeholders, 
+    style logout/login buttons
+
+last.fm gets info, genius gets lyrics
+both take info from searchbar
+
+features:
+
+database reqs:
+
+frontend: mobile usage
+
+mvp: BARE MIN: serve one song with lyrics, save song/url to DB. 
+    better: able to serve random artist or plus lyric list for song.
+            random from genre plus lyric list for song. 
+            ability to save specific songs(?)
+
+    pulling from genre feels like the way to go.
+
+
+
+stretch goals: eventbrite api, scrolling lyrics timed to song,
+
+db: user/pass, genre, songs, artists, albums
+    Say we have multiple users, how do we structure the DB?
+    What does a user need to have stored?:
+        email, username, password, favorite artists?,- 
+        individual songs?(seems redundant with the function of spotify),
