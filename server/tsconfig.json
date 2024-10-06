@@ -24,7 +24,7 @@
     "jsx": "react",                            /* Enable React JSX syntax support. */
 
     /* File Handling */
-    "noEmit": true,                            /* Do not emit compiled JavaScript files. */
+    "noEmit": false,                            /* Do not emit compiled JavaScript files. */
     
     /* Directories */
     "rootDir": "src",                          /* Specify the root folder of your source files. */
