@@ -4,7 +4,7 @@ import routes from './routes/index.js'; // Existing routes
 import musixmatchRoutes from './routes/musixmatch.js'; // Import the Musixmatch routes
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8001;
 
 // Serve static files from the client's dist folder
 app.use(express.static('../client/dist'));
